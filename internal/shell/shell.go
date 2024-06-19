@@ -6,7 +6,9 @@ import (
 )
 
 func Init(proxy string) error {
-	os.Setenv("http_proxy", proxy)
+	if err := os.Setenv("http_proxy", proxy); err != nil {
+		return err
+	}
 
 	cmd := exec.Command(defaultShell())
 	cmd.Stdin = os.Stdin
